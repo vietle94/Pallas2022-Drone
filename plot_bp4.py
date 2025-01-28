@@ -3,6 +3,7 @@ import glob
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.dates as mdates
+import string
 # %%
 def calculate_height(p0, p1, T0, T1):
     R = 287.05
@@ -61,8 +62,13 @@ for ax_, parameter, lab in zip(ax.flatten(),
 ax[0, 0].set_ylabel('Height a.g.l (m)')
 ax[1, 0].set_ylabel('Height a.g.l (m)')
 ax_.set_xscale('log')
+for n, ax_ in enumerate(ax.flatten()):
+    ax_.text(-0.0, 1.05, '(' + string.ascii_lowercase[n] + ')',
+        transform=ax_.transAxes, size=12)
 cbar = fig.colorbar(p, ax=ax)
 cbar.ax.yaxis.set_major_locator(mdates.DayLocator(interval=7))
 cbar.ax.yaxis.set_major_formatter(mdates.DateFormatter(r'%d/%m'))
 fig.savefig(r"C:\Users\le\OneDrive - Ilmatieteen laitos\My_articles\2024\Pallas\BP4_profile.png", dpi=600,
             bbox_inches='tight')
+
+# %%
